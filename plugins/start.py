@@ -28,7 +28,7 @@ async def decode(base64_string):
 async def start(client, message):
     if not await checkdb.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-        name = await client.ask(message.chat.id, "<b>Welcome To HP_Raj Disk.\n\nIts Time To Create Account On HP_Raj Disk\n\nNow Send Me Your Business Name Which Show On Website\nEx :- <code>HP_Raj Disk</code></b>")
+        name = await client.ask(message.chat.id, "<b>Welcome To HP_Raj MOVIES.\n\nIts Time To Create Account On HP_Raj MOVIES\n\nNow Send Me Your Business Name Which Show On Website\nEx :- <code>HP_Raj MOVIES</code></b>")
         if name.text:
             await db.set_name(message.from_user.id, name=name.text)
         else:
@@ -41,7 +41,7 @@ async def start(client, message):
         await checkdb.add_user(message.from_user.id, message.from_user.first_name)
         return await message.reply("<b>Congratulations 🎉\n\nYour Account Created Successfully.\n\nFor Uploading File In Quality Option Use Command /quality\n\nMore Commands Are /account and /update and /withdraw\n\nFor Without Quality Option Direct Send File To Bot.</b>")
     else:
-        rm = InlineKeyboardMarkup([[InlineKeyboardButton("✨ Update Channel", url="https://t.me/VJ_Disk")]])
+        rm = InlineKeyboardMarkup([[InlineKeyboardButton("✨ Update Channel", url="https://t.me/HP_Raj_MOVIES")]])
         await client.send_message(
             chat_id=message.from_user.id,
             text=script.START_TXT.format(message.from_user.mention),
