@@ -28,12 +28,12 @@ async def decode(base64_string):
 async def start(client, message):
     if not await checkdb.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-        name = await client.ask(message.chat.id, "<b>Welcome To VJ Disk.\n\nIts Time To Create Account On VJ Disk\n\nNow Send Me Your Business Name Which Show On Website\nEx :- <code>Tech VJ</code></b>")
+        name = await client.ask(message.chat.id, "<b>Welcome To HP_Raj Disk.\n\nIts Time To Create Account On HP_Raj Disk\n\nNow Send Me Your Business Name Which Show On Website\nEx :- <code>HP_Raj Disk</code></b>")
         if name.text:
             await db.set_name(message.from_user.id, name=name.text)
         else:
             return await message.reply("**Wrong Input Start Your Process Again By Hitting /start**")
-        link = await client.ask(message.chat.id, "<b>Now Send Me Your Telegram Channel Link, Channel Link Will Show On Your Website.\n\nSend Like This <code>https://t.me/VJ_Bots</code> ✅\n\nDo not send like this @VJ_Bots ❌</b>")
+        link = await client.ask(message.chat.id, "<b>Now Send Me Your Telegram Channel Link, Channel Link Will Show On Your Website.\n\nSend Like This <code>https://t.me/HP_Raj_MOVIES</code> ✅\n\nDo not send like this @HP_Raj_MOVIES ❌</b>")
         if link.text and link.text.startswith(('http://', 'https://')):
             await db.set_link(message.from_user.id, link=link.text)
         else:
@@ -54,14 +54,14 @@ async def start(client, message):
 async def update(client, message):
     vj = True
     if vj:
-        name = await client.ask(message.chat.id, "<b>Now Send Me Your Business Name Which Show On Website\nEx :- <code>Tech VJ</code>\n\n/cancel - cancel the process</b>")
+        name = await client.ask(message.chat.id, "<b>Now Send Me Your Business Name Which Show On Website\nEx :- <code>HP_Raj</code>\n\n/cancel - cancel the process</b>")
         if name.text == "/cancel":
             return await message.reply("**Process Cancelled**")
         if name.text:
             await db.set_name(message.from_user.id, name=name.text)
         else:
             return await message.reply("**Wrong Input Start Your Process Again By Hitting /update**")
-        link = await client.ask(message.chat.id, "<b>Now Send Me Your Telegram Channel Link, Channel Link Will Show On Your Website.\n\nSend Like This <code>https://t.me/VJ_Bots</code> ✅\n\nDo not send like this @VJ_Bots ❌</b>")
+        link = await client.ask(message.chat.id, "<b>Now Send Me Your Telegram Channel Link, Channel Link Will Show On Your Website.\n\nSend Like This <code>https://t.me/HP_Raj_MOVIES</code> ✅\n\nDo not send like this @HP_Raj_MOVIES ❌</b>")
         if link.text and link.text.startswith(('http://', 'https://')):
             await db.set_link(message.from_user.id, link=link.text)
         else:
@@ -181,7 +181,7 @@ async def quality_link(client, message):
         url1 = f"{urlencode(params)}"
         link = await encode(url1)
         encoded_url = f"{LINK_URL}?Tech_VJ={link}"
-        rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
+        rm=InlineKeyboardMarkup([[InlineKeyboardButton("🔅 Open Link", url=encoded_url)]])
         return await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
     else:
         return await message.reply("Choose Quality From Above Three Quality Only. Send /quality commamd again to start creating link.")
@@ -189,15 +189,15 @@ async def quality_link(client, message):
     params = {'u': message.from_user.id, 'w': first_id, 's': second_id, 't': third_id}
     url1 = f"{urlencode(params)}"
     link = await encode(url1)
-    encoded_url = f"{LINK_URL}?Tech_VJ={link}"
-    rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
+    encoded_url = f"{LINK_URL}?HP_Raj={link}"
+    rm=InlineKeyboardMarkup([[InlineKeyboardButton("🔅 Open Link", url=encoded_url)]])
     await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
 
 @Client.on_message(filters.private & filters.text & ~filters.command(["account", "withdraw", "notify", "quality", "start", "update"]))
 async def link_start(client, message):
     if not message.text.startswith(LINK_URL):
         return
-    link_part = message.text[len(LINK_URL + "?Tech_VJ="):].strip()
+    link_part = message.text[len(LINK_URL + "?HP_Raj="):].strip()
     try:
         original = await decode(link_part)
     except:
@@ -208,7 +208,7 @@ async def link_start(client, message):
         return await message.reply("**Link Invalid**")
     user_id = user_id.replace("&w", "")
     if user_id == message.from_user.id:
-        rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=message.text)]])
+        rm=InlineKeyboardMarkup([[InlineKeyboardButton("🔅 Open Link", url=message.text)]])
         return await message.reply_text(text=f"<code>{message.text}</code>", reply_markup=rm)
     id = id.replace("&s", "")
     sec = sec.replace("&t", "")
@@ -216,7 +216,7 @@ async def link_start(client, message):
     url1 = f"{urlencode(params)}"
     link = await encode(url1)
     encoded_url = f"{LINK_URL}?Tech_VJ={link}"
-    rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
+    rm=InlineKeyboardMarkup([[InlineKeyboardButton("🔅 Open Link", url=encoded_url)]])
     await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
 
 @Client.on_message(filters.private & filters.command("account"))
